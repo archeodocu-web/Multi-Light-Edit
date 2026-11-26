@@ -1,0 +1,109 @@
+{
+  "MLE": {
+    "ToolTitle": "Multi Light Edit",
+    "Navigation": {
+      "Label": "Editor sections",
+      "Basic": "Basic Configuration",
+      "Animation": "Light Animation",
+      "Advanced": "Advanced Options"
+    },
+    "Summary": {
+      "One": "1 selected light source",
+      "Many": "{count} selected light sources",
+      "Description": "Move a slider: changes are applied live to all selected lights. Untouched settings remain unchanged. Use the button below for a final save and value verification.",
+      "Live": "Live editing"
+    },
+    "Sections": {
+      "Light": "Light",
+      "Darkness": "Darkness – Activation Range",
+      "Animation": "Animation",
+      "Advanced": "Advanced Options"
+    },
+    "Fields": {
+      "Bright": "Bright radius",
+      "Dim": "Dim radius",
+      "Alpha": "Light opacity",
+      "DarknessMin": "Minimum – lower bound (min)",
+      "DarknessMax": "Maximum – upper bound (max)",
+      "AnimationType": "Animation type",
+      "AnimationSpeed": "Animation speed",
+      "AnimationIntensity": "Animation intensity",
+      "AnimationReverse": "Reverse animation direction",
+      "Walls": "Constrained by walls",
+      "Vision": "Provides vision",
+      "Color": "Light color",
+      "Coloration": "Color intensity",
+      "Luminosity": "Luminosity",
+      "Contrast": "Contrast",
+      "Saturation": "Saturation",
+      "Attenuation": "Light attenuation",
+      "Shadows": "Shadow intensity",
+      "Priority": "Priority",
+      "Angle": "Emission angle",
+      "Rotation": "Rotation",
+      "Elevation": "Elevation",
+      "Negative": "Darkness source"
+    },
+    "Help": {
+      "Bright": "Distance of the bright light region.",
+      "Dim": "Distance of the dim light region.",
+      "Alpha": "Opacity of the emitted light.",
+      "DarknessMin": "Upper slider: the lower darkness threshold from which the light can be active. It cannot exceed the maximum.",
+      "DarknessMax": "Lower slider: the upper darkness threshold until which the light remains active. It cannot be below the minimum.",
+      "AnimationSpeed": "Speed of the selected light animation.",
+      "AnimationIntensity": "Intensity of the selected light animation.",
+      "Walls": "The light is constrained by nearby walls and surfaces.",
+      "Vision": "The light source can provide vision to tokens.",
+      "Coloration": "Intensity of the light coloration.",
+      "Luminosity": "Affects the perceived luminosity.",
+      "Contrast": "Contrast of the lighting effect.",
+      "Saturation": "Color saturation of the lighting effect.",
+      "Attenuation": "How strongly light fades toward its edge.",
+      "Shadows": "Intensity of the shadow effect.",
+      "Priority": "Priority when light and darkness sources overlap.",
+      "Angle": "Emission cone angle.",
+      "Rotation": "Light source rotation in degrees.",
+      "Elevation": "Vertical elevation of the light source.",
+      "Negative": "Creates an area of artificial darkness instead of light."
+    },
+    "Darkness": {
+      "Intro": "Set the darkness interval like Foundry’s light configuration: “Between min and max”.",
+      "Between": "Darkness Activation Range – Between",
+      "Explanation": "The light is active only while scene darkness is between Minimum and Maximum. 0% = bright, 100% = fully dark.",
+      "Bright": "Bright",
+      "Dark": "Dark",
+      "ActiveRange": "Light active",
+      "Example": "Active between {min}% and {max}% scene darkness."
+    },
+    "Animation": {
+      "None": "No animation"
+    },
+    "Buttons": {
+      "Save": "Save changes"
+    },
+    "Status": {
+      "Idle": "No changes yet.",
+      "Pending": "Applying live changes …",
+      "Saved": "Applied live and saved.",
+      "Error": "Save failed — use the button below to retry.",
+      "VerifyError": "Verification failed — see the browser console for details."
+    },
+    "Footer": {
+      "Version": "Multi Light Edit · Alpha 0.2.0",
+      "Target": "Foundry VTT v14"
+    },
+    "Notifications": {
+      "SceneNotReady": "The scene is not ready yet.",
+      "SelectLights": "Select at least one light source on the scene first.",
+      "Saved": "Changes saved and verified for {count} selected light source(s).",
+      "NoChanges": "No changes were made.",
+      "SceneMissing": "The original scene is no longer available.",
+      "VerifyError": "Not all changes could be verified. See the browser console for details.",
+      "SceneChanged": "The scene changed. Changes were not applied to a different scene.",
+      "LightMissing": "At least one selected light source no longer exists. Reopen the editor.",
+      "DarknessInvalid": "Invalid darkness range. Values must be between 0 and 1, and “Active from” cannot be greater than “Active until”.",
+      "UpdateMismatch": "Foundry did not save all light values as expected. See the browser console for details.",
+      "SaveFailed": "The light values could not be saved. Use the button below to try again."
+    }
+  }
+}

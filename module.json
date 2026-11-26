@@ -1,0 +1,33 @@
+{
+  "id": "multi-light-edit",
+  "title": "Multi Light Edit",
+  "description": "A bilingual mass editor for selected Ambient Lights in Foundry VTT.",
+  "version": "0.2.0-alpha.3",
+  "authors": [
+    {
+      "name": "Multi Light Edit contributors"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.370"
+  },
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/multi-light-edit.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    }
+  ]
+}

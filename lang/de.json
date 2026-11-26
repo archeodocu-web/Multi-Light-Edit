@@ -1,0 +1,109 @@
+{
+  "MLE": {
+    "ToolTitle": "Multi Light Edit",
+    "Navigation": {
+      "Label": "Editor-Bereiche",
+      "Basic": "Grundkonfiguration",
+      "Animation": "Lichtanimation",
+      "Advanced": "Erweiterte Optionen"
+    },
+    "Summary": {
+      "One": "1 ausgewählte Lichtquelle",
+      "Many": "{count} ausgewählte Lichtquellen",
+      "Description": "Bewege einen Regler: Änderungen werden live auf alle ausgewählten Lichtquellen übertragen. Nicht berührte Einstellungen bleiben unverändert. Der Button unten führt eine abschließende Speicher- und Wertprüfung durch.",
+      "Live": "Live-Bearbeitung"
+    },
+    "Sections": {
+      "Light": "Licht",
+      "Darkness": "Dunkelheit – Aktivierungsbereich",
+      "Animation": "Animation",
+      "Advanced": "Erweiterte Optionen"
+    },
+    "Fields": {
+      "Bright": "Helles Licht (Bright)",
+      "Dim": "Gedimmtes Licht (Dim)",
+      "Alpha": "Licht-Deckkraft",
+      "DarknessMin": "Minimum – Untergrenze (min)",
+      "DarknessMax": "Maximum – Obergrenze (max)",
+      "AnimationType": "Animationstyp",
+      "AnimationSpeed": "Animationsgeschwindigkeit",
+      "AnimationIntensity": "Animationsintensität",
+      "AnimationReverse": "Animationsrichtung umkehren",
+      "Walls": "Durch Wände begrenzen",
+      "Vision": "Sicht ermöglichen",
+      "Color": "Lichtfarbe",
+      "Coloration": "Farbintensität",
+      "Luminosity": "Leuchtkraft",
+      "Contrast": "Kontrast",
+      "Saturation": "Sättigung",
+      "Attenuation": "Lichtabfall",
+      "Shadows": "Schattenintensität",
+      "Priority": "Priorität",
+      "Angle": "Lichtwinkel",
+      "Rotation": "Drehung",
+      "Elevation": "Höhe",
+      "Negative": "Dunkelheitsquelle"
+    },
+    "Help": {
+      "Bright": "Reichweite des hellen Lichtbereichs.",
+      "Dim": "Reichweite des schwächeren Lichtbereichs.",
+      "Alpha": "Deckkraft des ausgestrahlten Lichts.",
+      "DarknessMin": "Obere Reglerleiste: unterer Darkness-Wert, ab dem das Licht aktiv sein kann. Darf nie über dem Maximum liegen.",
+      "DarknessMax": "Untere Reglerleiste: oberer Darkness-Wert, bis zu dem das Licht aktiv bleibt. Darf nie unter dem Minimum liegen.",
+      "AnimationSpeed": "Geschwindigkeit der ausgewählten Lichtanimation.",
+      "AnimationIntensity": "Intensität der ausgewählten Lichtanimation.",
+      "Walls": "Die Lichtquelle wird durch nahe Wände und Oberflächen begrenzt.",
+      "Vision": "Die Lichtquelle kann Sicht für Tokens bereitstellen.",
+      "Coloration": "Intensität der Farbgebung des Lichts.",
+      "Luminosity": "Beeinflusst die wahrgenommene Leuchtkraft.",
+      "Contrast": "Kontrast der Lichtwirkung.",
+      "Saturation": "Farbsättigung der Lichtwirkung.",
+      "Attenuation": "Wie stark das Licht zum Rand hin abfällt.",
+      "Shadows": "Intensität der Schattenwirkung.",
+      "Priority": "Priorität bei der Überlagerung von Licht- und Dunkelheitsquellen.",
+      "Angle": "Öffnungswinkel des Lichtkegels.",
+      "Rotation": "Drehung der Lichtquelle in Grad.",
+      "Elevation": "Vertikale Höhe der Lichtquelle.",
+      "Negative": "Erzeugt einen Bereich künstlicher Dunkelheit statt Licht."
+    },
+    "Darkness": {
+      "Intro": "Stelle den Darkness-Bereich wie in Foundrys Lichtkonfiguration als „Between min und max“ ein.",
+      "Between": "Darkness Activation Range – Between",
+      "Explanation": "Das Licht ist nur aktiv, wenn die Szenen-Dunkelheit zwischen Minimum und Maximum liegt. 0 % = hell, 100 % = vollständig dunkel.",
+      "Bright": "Hell",
+      "Dark": "Dunkel",
+      "ActiveRange": "Licht aktiv",
+      "Example": "Aktiv zwischen {min} % und {max} % Szenen-Dunkelheit."
+    },
+    "Animation": {
+      "None": "Keine Animation"
+    },
+    "Buttons": {
+      "Save": "Änderungen speichern"
+    },
+    "Status": {
+      "Idle": "Noch keine Änderungen.",
+      "Pending": "Live-Anpassung – wird übernommen …",
+      "Saved": "Live übernommen und gespeichert.",
+      "Error": "Speichern fehlgeschlagen – unten erneut speichern.",
+      "VerifyError": "Prüfung fehlgeschlagen – Details in der Browser-Konsole."
+    },
+    "Footer": {
+      "Version": "Multi Light Edit · Alpha 0.2.0",
+      "Target": "Foundry VTT v14"
+    },
+    "Notifications": {
+      "SceneNotReady": "Die Szene ist noch nicht bereit.",
+      "SelectLights": "Wähle zuerst mindestens eine Lichtquelle auf der Szene aus.",
+      "Saved": "Änderungen für {count} ausgewählte Lichtquelle(n) gespeichert und überprüft.",
+      "NoChanges": "Es wurden keine Änderungen vorgenommen.",
+      "SceneMissing": "Die ursprüngliche Szene ist nicht mehr verfügbar.",
+      "VerifyError": "Nicht alle Änderungen konnten abschließend bestätigt werden. Details stehen in der Browser-Konsole.",
+      "SceneChanged": "Die Szene wurde gewechselt. Die Änderungen wurden nicht auf eine andere Szene übertragen.",
+      "LightMissing": "Mindestens eine ausgewählte Lichtquelle ist nicht mehr vorhanden. Bitte Editor neu öffnen.",
+      "DarknessInvalid": "Ungültiger Dunkelheitsbereich. Die Werte müssen zwischen 0 und 1 liegen und „Aktiv ab“ darf nicht über „Aktiv bis“ liegen.",
+      "UpdateMismatch": "Foundry hat nicht alle Lichtwerte wie erwartet gespeichert. Details stehen in der Browser-Konsole.",
+      "SaveFailed": "Die Lichtwerte konnten nicht gespeichert werden. Unten kannst du das Speichern erneut versuchen."
+    }
+  }
+}

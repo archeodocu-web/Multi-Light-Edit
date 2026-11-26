@@ -1,0 +1,656 @@
+/* Multi Light Edit — dark, warm-gold Foundry-native editor */
+#scene-controls .control-tool[data-tool="multi-light-edit"] i {
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  font-size: 0;
+  background: url("../icons/three-bulbs.svg") center / contain no-repeat;
+}
+
+#scene-controls .control-tool[data-tool="multi-light-edit"] i::before {
+  content: "";
+  display: none;
+}
+
+.multi-light-edit-dialog {
+  --mle-bg: #12110f;
+  --mle-panel: #1b1915;
+  --mle-panel-raised: #242018;
+  --mle-border: rgba(213, 165, 77, 0.52);
+  --mle-border-soft: rgba(213, 165, 77, 0.24);
+  --mle-gold: #d9aa50;
+  --mle-gold-bright: #f1cf82;
+  --mle-text: #f3ead6;
+  --mle-muted: #b9ad95;
+  --mle-green: #4b9b58;
+  --mle-red: #a51d13;
+  width: min(980px, 94vw);
+  min-width: 0;
+  max-width: 94vw;
+  color: var(--mle-text);
+  font-family: var(--font-primary, "Signika", Arial, sans-serif);
+}
+
+.multi-light-edit-dialog .window-header {
+  background: linear-gradient(180deg, #292117, #17130e);
+  border-bottom: 1px solid var(--mle-border);
+  color: var(--mle-gold-bright);
+}
+
+.multi-light-edit-dialog .window-header .window-title {
+  color: var(--mle-gold-bright);
+  font-family: var(--font-secondary, "Modesto Condensed", serif);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.multi-light-edit-dialog .window-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  padding: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(177, 127, 43, 0.08), transparent 42%),
+    linear-gradient(135deg, #14130f 0%, #0e0d0b 100%);
+  color: var(--mle-text);
+}
+
+.multi-light-edit-dialog .window-content > form,
+.multi-light-edit-dialog .window-content form {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.multi-light-edit-dialog .dialog-content {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  height: 0;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.multi-light-edit-dialog .mle-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  padding: 1rem 1.1rem 0.9rem;
+  font-family: var(--font-primary, "Signika", Arial, sans-serif);
+  font-size: 0.94rem;
+  line-height: 1.4;
+  scrollbar-width: auto;
+  scrollbar-color: #b88a3d #17140f;
+}
+
+.multi-light-edit-dialog .mle-form::-webkit-scrollbar {
+  width: 12px;
+}
+
+.multi-light-edit-dialog .mle-form::-webkit-scrollbar-track {
+  border-left: 1px solid var(--mle-border-soft);
+  background: #17140f;
+}
+
+.multi-light-edit-dialog .mle-form::-webkit-scrollbar-thumb {
+  border: 2px solid #17140f;
+  border-radius: 8px;
+  background: #9b7435;
+}
+
+.multi-light-edit-dialog .mle-form::-webkit-scrollbar-thumb:hover {
+  background: #d9aa50;
+}
+
+.multi-light-edit-dialog .mle-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--mle-border-soft);
+  border-radius: 7px;
+  background: linear-gradient(110deg, rgba(218, 170, 80, 0.10), rgba(218, 170, 80, 0.025));
+}
+
+.multi-light-edit-dialog .mle-summary-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 2.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid var(--mle-border);
+  border-radius: 6px;
+  color: var(--mle-gold-bright);
+  font-size: 1.25rem;
+}
+
+.multi-light-edit-dialog .mle-summary-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.multi-light-edit-dialog .mle-summary-copy strong {
+  display: block;
+  color: #fff5de;
+  font-size: 0.98rem;
+}
+
+.multi-light-edit-dialog .mle-summary-copy p {
+  margin: 0.18rem 0 0;
+  color: var(--mle-muted);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.multi-light-edit-dialog .mle-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 0 0 auto;
+  padding: 0.32rem 0.55rem;
+  border: 1px solid rgba(91, 169, 102, 0.45);
+  border-radius: 999px;
+  color: #b9e1be;
+  background: rgba(49, 116, 59, 0.18);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.multi-light-edit-dialog .mle-live-pill span {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #64b871;
+  box-shadow: 0 0 7px rgba(100, 184, 113, 0.8);
+}
+
+
+.multi-light-edit-dialog .mle-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.9rem 0.95rem;
+  border: 1px solid var(--mle-border-soft);
+  border-radius: 7px;
+  background: linear-gradient(140deg, rgba(39, 34, 25, 0.88), rgba(22, 20, 16, 0.92));
+  scroll-margin-top: 0.5rem;
+}
+
+.multi-light-edit-dialog .mle-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--mle-border-soft);
+  color: #f4dfb3;
+  font-family: var(--font-secondary, "Modesto Condensed", serif);
+  font-size: 1.38rem;
+  font-weight: 700;
+}
+
+.multi-light-edit-dialog .mle-section h3 i,
+.multi-light-edit-dialog .mle-advanced summary > span > i {
+  color: var(--mle-gold-bright);
+}
+
+.multi-light-edit-dialog .mle-section-intro {
+  margin: -0.25rem 0 0;
+  color: var(--mle-muted);
+  font-size: 0.82rem;
+}
+
+.multi-light-edit-dialog .mle-slider-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.62rem 1rem;
+}
+
+.multi-light-edit-dialog .mle-slider-row {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.22rem;
+  padding: 0.2rem 0.25rem;
+  border-left: 2px solid transparent;
+  border-radius: 2px;
+}
+
+.multi-light-edit-dialog .mle-slider-row.is-touched {
+  border-left-color: var(--mle-gold);
+  background: rgba(217, 170, 80, 0.035);
+}
+
+.multi-light-edit-dialog .mle-slider-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.multi-light-edit-dialog .mle-slider-heading label,
+.multi-light-edit-dialog .mle-field-row label,
+.multi-light-edit-dialog .mle-color-row label {
+  color: #f0e6d1;
+  font-size: 0.87rem;
+  font-weight: 600;
+}
+
+.multi-light-edit-dialog .mle-value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.2rem;
+  padding: 0.2rem 0.45rem;
+  border: 1px solid rgba(213, 165, 77, 0.40);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--mle-gold-bright);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.multi-light-edit-dialog input[type="range"] {
+  width: 100%;
+  min-width: 90px;
+  height: 1.05rem;
+  margin: 0;
+  accent-color: var(--mle-gold);
+  cursor: pointer;
+}
+
+.multi-light-edit-dialog input[type="range"]::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--mle-gold) 0%, #89652d 100%);
+}
+
+.multi-light-edit-dialog input[type="range"]::-webkit-slider-thumb {
+  width: 13px;
+  height: 13px;
+  margin-top: -5px;
+  border: 2px solid #f0bd58;
+  border-radius: 50%;
+  background: #17130e;
+  box-shadow: 0 0 0 2px rgba(217, 170, 80, 0.12);
+}
+
+.multi-light-edit-dialog .mle-help {
+  margin: 0;
+  color: #a99d87;
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+.multi-light-edit-dialog .mle-darkness-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.multi-light-edit-dialog .mle-darkness-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.multi-light-edit-dialog .mle-darkness-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.8rem;
+  border: 1px solid var(--mle-border);
+  border-radius: 7px;
+  background: linear-gradient(145deg, rgba(217, 170, 80, 0.09), rgba(0, 0, 0, 0.16));
+}
+
+.multi-light-edit-dialog .mle-darkness-info h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  color: #f5dfb1;
+  font-size: 0.92rem;
+}
+
+.multi-light-edit-dialog .mle-darkness-info h4 i {
+  color: var(--mle-gold-bright);
+}
+
+.multi-light-edit-dialog .mle-darkness-info p {
+  margin: 0;
+  color: var(--mle-muted);
+  font-size: 0.77rem;
+  line-height: 1.35;
+}
+
+.multi-light-edit-dialog .mle-range-labels {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  color: #d9c59c;
+  font-size: 0.75rem;
+}
+
+.multi-light-edit-dialog .mle-range-labels span {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.multi-light-edit-dialog .mle-range-labels small {
+  display: block;
+  color: var(--mle-muted);
+  font-size: 0.67rem;
+}
+
+.multi-light-edit-dialog .mle-darkness-track {
+  position: relative;
+  height: 1.55rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  background: linear-gradient(90deg, #555b62, #30343b);
+}
+
+.multi-light-edit-dialog .mle-darkness-track::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--mle-from, 0%);
+  width: var(--mle-width, 100%);
+  background: linear-gradient(90deg, #338743, #55b964);
+  content: "";
+  transition: left 90ms ease, width 90ms ease;
+}
+
+.multi-light-edit-dialog .mle-darkness-active {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-shadow: 0 1px 2px #000;
+  pointer-events: none;
+}
+
+.multi-light-edit-dialog .mle-example {
+  color: #d8c6a1 !important;
+  font-size: 0.72rem !important;
+}
+
+.multi-light-edit-dialog .mle-field-row,
+.multi-light-edit-dialog .mle-color-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.multi-light-edit-dialog .mle-select-row select {
+  width: min(65%, 500px);
+  min-height: 2.1rem;
+  border: 1px solid var(--mle-border);
+  border-radius: 5px;
+  background: #100e0b;
+  color: var(--mle-text);
+}
+
+.multi-light-edit-dialog .mle-check-row,
+.multi-light-edit-dialog .mle-check-card {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--mle-text);
+  font-size: 0.83rem;
+}
+
+.multi-light-edit-dialog input[type="checkbox"] {
+  accent-color: var(--mle-gold);
+}
+
+.multi-light-edit-dialog .mle-advanced {
+  padding: 0;
+  gap: 0;
+}
+
+.multi-light-edit-dialog .mle-advanced summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0.95rem;
+  color: #f4dfb3;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-secondary, "Modesto Condensed", serif);
+  font-size: 1.18rem;
+  font-weight: 700;
+}
+
+.multi-light-edit-dialog .mle-advanced summary::-webkit-details-marker {
+  display: none;
+}
+
+.multi-light-edit-dialog .mle-advanced summary > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.multi-light-edit-dialog .mle-advanced[open] summary {
+  border-bottom: 1px solid var(--mle-border-soft);
+}
+
+.multi-light-edit-dialog .mle-advanced[open] .mle-chevron {
+  transform: rotate(180deg);
+}
+
+.multi-light-edit-dialog .mle-chevron {
+  color: var(--mle-gold);
+  transition: transform 120ms ease;
+}
+
+.multi-light-edit-dialog .mle-advanced-content {
+  padding: 0.9rem;
+}
+
+.multi-light-edit-dialog .mle-advanced-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1rem;
+}
+
+.multi-light-edit-dialog .mle-check-card {
+  align-items: flex-start;
+  padding: 0.55rem;
+  border: 1px solid var(--mle-border-soft);
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.multi-light-edit-dialog .mle-check-card input {
+  margin-top: 0.2rem;
+}
+
+.multi-light-edit-dialog .mle-check-card strong,
+.multi-light-edit-dialog .mle-check-card small {
+  display: block;
+}
+
+.multi-light-edit-dialog .mle-check-card small {
+  margin-top: 0.18rem;
+  color: var(--mle-muted);
+  font-size: 0.69rem;
+  font-weight: 400;
+}
+
+.multi-light-edit-dialog .mle-color-row {
+  min-height: 2.3rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--mle-border-soft);
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.multi-light-edit-dialog input[type="color"] {
+  width: 3rem;
+  height: 1.8rem;
+  padding: 2px;
+  border: 1px solid var(--mle-border);
+  border-radius: 4px;
+  background: #0c0b09;
+  cursor: pointer;
+}
+
+.multi-light-edit-dialog .mle-live-status {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid rgba(213, 165, 77, 0.22);
+  border-left: 3px solid #82714e;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--mle-muted);
+  font-size: 0.77rem;
+}
+
+.multi-light-edit-dialog .mle-live-status[data-state="pending"] {
+  border-left-color: var(--mle-gold);
+  color: #f1d79f;
+}
+
+.multi-light-edit-dialog .mle-live-status[data-state="saved"] {
+  border-left-color: #55a962;
+  color: #b9e1be;
+}
+
+.multi-light-edit-dialog .mle-live-status[data-state="error"] {
+  border-left-color: #d15a4f;
+  color: #ffb7ae;
+}
+
+.multi-light-edit-dialog .mle-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.15rem;
+  color: #93876f;
+  font-size: 0.69rem;
+}
+
+.multi-light-edit-dialog .dialog-buttons {
+  flex: 0 0 auto;
+  padding: 0.55rem 0.85rem 0.75rem;
+  border-top: 1px solid var(--mle-border-soft);
+  background: #100e0b;
+}
+
+.multi-light-edit-dialog .dialog-buttons button {
+  min-height: 2.55rem;
+  border: 1px solid #d5a54d;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #b72d1e, #78170f);
+  color: #fff2d9;
+  font-weight: 700;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.multi-light-edit-dialog .dialog-buttons button:hover {
+  background: linear-gradient(180deg, #ce3827, #8a1c12);
+  box-shadow: 0 0 9px rgba(217, 170, 80, 0.18);
+}
+
+@media (max-width: 760px) {
+  .multi-light-edit-dialog {
+    min-width: 0;
+  }
+
+  .multi-light-edit-dialog .mle-form {
+    min-height: 0;
+    max-height: none;
+    padding: 0.7rem;
+  }
+
+  .multi-light-edit-dialog .mle-darkness-section {
+    grid-template-columns: 1fr;
+  }
+
+  .multi-light-edit-dialog .mle-advanced-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .multi-light-edit-dialog .mle-live-pill {
+    display: none;
+  }
+}
+
+/* Readable Foundry UI typography: never inherit code/monospace styles into the form. */
+.multi-light-edit-dialog .mle-form,
+.multi-light-edit-dialog .mle-form p,
+.multi-light-edit-dialog .mle-form label,
+.multi-light-edit-dialog .mle-form output,
+.multi-light-edit-dialog .mle-form strong,
+.multi-light-edit-dialog .mle-form small,
+.multi-light-edit-dialog .mle-form select,
+.multi-light-edit-dialog .mle-form input:not([type="checkbox"]):not([type="color"]),
+.multi-light-edit-dialog .mle-form button {
+  font-family: var(--font-primary, "Signika", Arial, sans-serif);
+  letter-spacing: normal;
+}
+
+.multi-light-edit-dialog .mle-darkness-controls .mle-slider-row:first-child {
+  border-left-color: rgba(217, 170, 80, 0.55);
+}
+
+.multi-light-edit-dialog .mle-darkness-controls .mle-slider-row:last-child {
+  border-left-color: rgba(109, 170, 112, 0.65);
+}
+
+.multi-light-edit-dialog .mle-darkness-controls .mle-value {
+  min-width: 4.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.multi-light-edit-dialog .mle-darkness-track {
+  isolation: isolate;
+}
+
+.multi-light-edit-dialog .mle-darkness-track::before {
+  z-index: 0;
+}
+
+.multi-light-edit-dialog .mle-darkness-active {
+  z-index: 1;
+}
+
+.multi-light-edit-dialog .dialog-buttons {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 760px) {
+  .multi-light-edit-dialog .mle-darkness-section {
+    grid-template-columns: 1fr;
+  }
+}
