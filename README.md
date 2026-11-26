@@ -1,120 +1,167 @@
 # Multi Light Edit
 
-A bilingual Foundry Virtual Tabletop v14 mass editor for selected Ambient Lights.
+**Multi Light Edit** is a small quality-of-life module for Foundry Virtual Tabletop. It makes it easier to edit multiple Ambient Lights at once instead of opening every light individually.
 
-## Version 0.2.0-alpha.2
+Select the lights you want to change, open Multi Light Edit from the Lighting controls, and adjust their settings in one place. Changes are applied live, so you can see the results directly on your scene.
 
-### Interface
+The interface is available in **English and German** and follows the language selected in Foundry.
 
-- Dark charcoal interface with warm gold accents, based on the supplied new-menu direction.
-- Three classic incandescent bulbs in the Lighting scene controls.
-- Section navigation for Basic Configuration, Light Animation, and Advanced Options.
-- Responsive Darkness Activation Range panel with an explanatory active-range display.
-- English and German translations loaded from the Foundry user's active language.
+## What can you do with it?
 
-### Editing behavior
+Multi Light Edit brings the most important Ambient Light settings together in one window:
 
-- Uses Foundry's normal Ambient Light selection. Ctrl-click multi-selection remains untouched.
-- Slider and form changes are applied live to all selected, updateable Ambient Lights.
-- Only changed properties are sent; untouched properties are never overwritten.
-- The single bottom **Save changes / Änderungen speichern** button flushes pending writes and verifies persisted values before closing.
-- Changes are already saved live; closing the window does not roll them back.
+- Adjust bright and dim light radius.
+- Change light opacity.
+- Set the Darkness Activation Range.
+- Change animation type, speed, and intensity.
+- Access advanced lighting options without opening each light separately.
 
-### Supported properties
+The goal is to make working with large numbers of lights faster and less repetitive.
 
-**Basic Configuration**
+## Editing multiple lights
 
-- Bright radius: `config.bright`
-- Dim radius: `config.dim`
-- Light opacity: `config.alpha`
-- Darkness activation range: `config.darkness.min` and `config.darkness.max`
+Multi Light Edit uses Foundry's normal Ambient Light selection.
 
-**Light Animation**
+You can select individual lights or use Foundry's Ctrl-click selection to build a group. Once you open the editor, it shows how many lights are selected.
 
-- Animation type: `config.animation.type`
-- Animation speed: `config.animation.speed`
-- Animation intensity: `config.animation.intensity`
-- Reverse direction: `config.animation.reverse`
+Move a slider or change a setting, and that value is applied to all selected lights immediately.
 
-**Advanced Options**
+You do not need to activate separate checkboxes for individual properties. Only settings you actually change are applied. Everything you leave untouched keeps its original value.
 
-- Constrained by walls: `walls`
-- Provides vision: `vision`
-- Darkness source: `config.negative`
-- Light color: `config.color`
-- Coloration: `config.coloration`
-- Luminosity: `config.luminosity`
-- Contrast: `config.contrast`
-- Saturation: `config.saturation`
-- Attenuation: `config.attenuation`
-- Shadows: `config.shadows`
-- Priority: `config.priority`
-- Emission angle: `config.angle`
-- Rotation: `rotation`
-- Elevation: `elevation`
+The **Save Changes** button at the bottom provides a final save and verification step. Changes are already saved live, so closing the window does not undo them.
 
-## Darkness range semantics
+## Available settings
 
-Foundry stores the Darkness Activation Range as normalized values between 0 and 1:
+### Basic Configuration
 
-- `config.darkness.min` = darkness level at which the light becomes active.
-- `config.darkness.max` = darkness level up to which the light remains active.
-- `0` means bright/daylight; `1` means fully dark.
+- **Bright Radius:** Controls the range of bright light.
+- **Dim Radius:** Controls the range of dim light.
+- **Light Opacity:** Adjusts the opacity of the emitted light.
+- **Darkness Activation Range:** Determines at which scene darkness levels the light is active.
 
-Example: a light that should switch on at 40% darkness and remain active until full darkness uses `min = 0.40` and `max = 1.00`.
+### Light Animation
 
-The editor keeps the valid range `min <= max`. When one handle crosses the other, the companion handle follows to preserve a valid Foundry range. Moving the start threshold down toward daylight is otherwise unrestricted.
+- Animation type
+- Animation speed
+- Animation intensity
+- Reverse animation direction
+
+### Advanced Options
+
+For more detailed adjustments, the editor also provides:
+
+- Wall and surface constraints
+- Vision
+- Darkness source
+- Light color
+- Coloration
+- Luminosity
+- Contrast
+- Saturation
+- Attenuation
+- Shadows
+- Priority
+- Emission angle
+- Rotation
+- Elevation
+
+## Understanding the Darkness Activation Range
+
+Foundry uses two values to determine when an Ambient Light is active.
+
+Both values range from `0` to `1`:
+
+- `0` represents full daylight.
+- `1` represents complete darkness.
+
+The two sliders control the lower and upper boundaries of the activation range.
+
+- **Minimum (`config.darkness.min`):** The darkness level at which the light becomes active.
+- **Maximum (`config.darkness.max`):** The darkness level up to which the light remains active.
+
+The minimum must never be higher than the maximum.
+
+For example, a light that should turn on at 10% darkness and remain active until 80% darkness uses:
+
+```js
+config.darkness.min = 0.10;
+config.darkness.max = 0.80;
+```
+
+The two sliders can be adjusted independently, but they always maintain a valid range. Moving one slider beyond the other adjusts the available range without allowing an invalid interval.
+
+## Working with different light settings
+
+When you select several lights with different settings, the editor initially uses the first selected light as its reference.
+
+This does not mean that all other settings are automatically overwritten.
+
+Only properties you actually change are applied to the selected lights. All untouched properties retain their individual values.
+
+This makes it possible to adjust one aspect of a group of lights without accidentally changing everything else.
 
 ## Installation
 
-1. Extract the ZIP.
-2. Copy the `multi-light-edit` folder into your Foundry user data `Data/modules/` directory.
-3. Confirm `module.json` is directly inside `Data/modules/multi-light-edit/`.
-4. Enable **Multi Light Edit** in Manage Modules.
-5. Open a scene, activate Lighting controls, select one or more Ambient Lights, and click the three-bulb tool.
+1. Download the latest Multi Light Edit ZIP.
+2. Extract the archive.
+3. Copy the `multi-light-edit` folder into your Foundry user data directory:
 
-## Language support
+   `Data/modules/`
 
-The module manifest registers `lang/de.json` and `lang/en.json`. Foundry loads the translation matching the user's active application language. No separate module language setting is required.
+4. Make sure `module.json` is directly inside the `multi-light-edit` folder.
+5. Start Foundry and open **Manage Modules**.
+6. Enable **Multi Light Edit**.
+7. Open a scene and activate the Lighting controls.
+8. Select one or more Ambient Lights and click the Multi Light Edit icon.
 
-## Testing checklist
+## Language Support
 
-- [ ] Module loads without errors on Foundry v14.
-- [ ] Language follows Foundry UI locale in German and English.
-- [ ] Three-bulb tool appears in Lighting controls for a GM.
-- [ ] Selection count matches the controlled Ambient Light document IDs.
-- [ ] Basic sliders update selected lights live.
-- [ ] With darkness range set to 0.40–1.00, lights activate from 40% scene darkness through full darkness.
-- [ ] Lowering the start threshold toward 0 remains possible while max is 1.00.
-- [ ] Increasing the start threshold beyond the current max moves max to keep the interval valid.
-- [ ] Animation type, speed, intensity, and reverse direction update live.
-- [ ] Advanced options update only the documented Ambient Light fields.
-- [ ] Untouched properties remain unchanged.
-- [ ] Bottom save button flushes queued writes and verifies persisted document values.
-- [ ] A failed update is reported and can be retried without false success.
+Multi Light Edit currently supports:
 
-## Scope and safety
+- English
+- German
 
-- The editor operates only on selected `AmbientLight` documents in the active scene that the current user can update.
-- It does not edit Token lights, Tiles, Walls, Sounds, or Scene darkness.
-- Values shown initially come from the first selected Ambient Light. If selected lights have mixed values, changing a control applies that one value to all selected lights; untouched controls preserve each light's own value.
-- This alpha has not been run in a live Foundry world by the build environment. Verify it in a test scene before bulk-editing a production scene.
+The module automatically follows the language selected in Foundry. There is no separate language setting to configure.
+
+Translation files are located in:
+
+- `lang/en.json`
+- `lang/de.json`
+
+## Current Version
+
+**Version 0.2.0-alpha.3**
+
+This version includes:
+
+- The redesigned dark interface with warm gold accents.
+- Multi-light editing through Foundry's Lighting controls.
+- Live updates for changed properties.
+- A final save and verification button.
+- English and German language support.
+- Improved Darkness Activation Range controls.
+- A vertically scrollable editor window.
+- A fixed save button at the bottom of the window.
+
+## Compatibility
+
+- Foundry Virtual Tabletop v14
+- Ambient Lights in the currently active scene
+
+The module does not edit Token Lights, Tiles, Walls, Sounds, or the scene's global darkness setting.
+
+Only Ambient Lights that the current user is allowed to update are included.
+
+## Important Notes
+
+Multi Light Edit is still an alpha release.
+
+The module has been checked for basic code and packaging issues, but it has not yet been fully tested in every Foundry setup.
+
+Before using it to change a large number of lights in an existing game, it is recommended to test it in a separate scene first.
+
+Feedback and bug reports are welcome. The goal is to keep the module simple, predictable, and useful for everyday Foundry game preparation.
 
 
-## Darkness Activation Range (alpha.2)
 
-The Darkness controls follow Foundry's native `Between min and max` interval exactly:
-
-- The **upper slider** writes `config.darkness.min` (lower numeric boundary).
-- The **lower slider** writes `config.darkness.max` (upper numeric boundary).
-- The minimum slider is dynamically capped at the current maximum.
-- The maximum slider is dynamically floored at the current minimum.
-- Moving either slider sends both interval endpoints together to all selected Ambient Lights.
-- Example: `0.10` to `0.80` means active from 10% through 80% scene darkness.
-
-The main editor has no top navigation bar. Its content area scrolls vertically while the bottom save button remains available. Numeric values are formatted using the active Foundry language.
-## 0.2.0-alpha.3
-
-- Fix DialogV2 content sizing so the editor body scrolls vertically when it exceeds the window height.
-- Keep the Save button fixed at the bottom while the editor body scrolls.
-- No lighting controls, labels, translations, or Darkness Activation Range behavior changed in this release.
+<img width="3409" height="1403" alt="Capture" src="https://github.com/user-attachments/assets/bf908e99-b468-422f-9188-8e43808baea1" />
